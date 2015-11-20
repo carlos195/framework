@@ -2,15 +2,12 @@
 
 ini_set('display_errors','on');//activamos la comprobacion errores
 
-define('DS',DIRECTORY_SEPARATOR);
-define('ROOT',realpath(dirname(__FILE__)).DS);
+error_reporting(E_ALL);
 
-define('APP',ROOT.'app'.DS);
-define('APP_W',basename($_SERVER['SCRIPT_NAME']));
-define('BASE_URL',basename(dirname($_SERVER['SCRIPT_NAME'])));
+include 'config.php';
 //echo $_SERVER['REQUEST_URI'];
 
-require 'sys/core.php';
+require 'sys/helper.php';
 
 Core::init();
 
