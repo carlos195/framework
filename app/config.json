@@ -1,6 +1,14 @@
 {
-	"driver":"mysql",
-	"dbname":"",
-	"dbhost":"",
-	"dbpass":""
+	"dbconf":{
+		"driver":"mysql",
+		"dbname":"anuncios",
+		"dbhost":"localhost",
+		"dbuser":"root",
+		"dbpass":""
+	},
+	"app":{
+		"title":"Framework Carlos",
+		"version":"0.1"
+	}
+
 }

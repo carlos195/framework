@@ -1,14 +1,26 @@
 <?php
+	// first phase 
+	// environment
+	// developer mode 
+	ini_set('display_errors','on');
+	//informe de errores
+	error_reporting(E_ALL);
 
-ini_set('display_errors','on');//activamos la comprobacion errores
+	include 'config.php';
+	require 'sys/helper.php';
+	
+	// Session proof
+	Session::init();
+	$id=Session::get('id');
+	
 
-error_reporting(E_ALL);
+	// reading configuration
 
-include 'config.php';
-//echo $_SERVER['REQUEST_URI'];
+	$conf=Registry::getInstance();
+	
+	$conf->welcome='Hola';  // __set()
+	$msg=$conf->welcome;    // __get()
 
-require 'sys/helper.php';
+	Core::init();
 
-Core::init();
-
-?>
+	

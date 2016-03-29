@@ -1,41 +1,44 @@
 <?php
+	class Request{
+		static private $query=array();
 
-class Request{
-
-	static private $query=array();
-
-	static function retrieve(){
-		$array_query=explode('/',$_SERVER['REQUEST_URI']);
-		array_shift($array_query); //extraemos el primer "/"
-		
-		if($array_query[0]==APP_W){ //en caso de root
+		static function retrieve(){
+			$array_query=explode('/',$_SERVER['REQUEST_URI']);
+			//extract the first "/"
 			array_shift($array_query);
+			// if we publish in root
+			
+			if (!is_base()){
+				array_shift($array_query);
+			}
+			//deleting blanks at the end
+			if(end($array_query)==""){
+				array_pop($array_query);
+			}
+			//return value to static $query
+			self::$query=$array_query;
+
+			//var_dump($array_query);
 		}
-
-		if(end($array_query)==""){ //quitamos espacios en blanco del final
-			array_pop($array_query);
+		static function getCont(){
+			return array_shift(self::$query);
 		}
+		static function getAct(){
+			return array_shift(self::$query);
+		}
+		static function getParams(){
+			//primer comprovar que queda algo
+			if (count(self::$query)>0){
+				//comprovar si és parell
+				if((count(self::$query)%2)==0){
+					Coder::codear(self::$query);
+					return self::$query;
 
-		self::$query=$array_query; //retorna valor a stati $query
-		var_dump($array_query);
-	}
+				}else{
+					echo 'ERROR in params array';
+				}
 
-	static function getCont(){
-		return array_shift(self::$query);
-	}
+			}
 
-	static function getAct(){
-		return array_shift(self::$query);
-	}
-
-	static function getParams(){
-		if(count(self::$query) > 0){
-			return self::$query;
-		}else{
-			echo ('error');
 		}
 	}
-
-}
-
-?>
